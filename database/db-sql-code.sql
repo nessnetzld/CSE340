@@ -1,3 +1,8 @@
+-- Database: 'cse 340 proect', .public schema
+-- Assignment 2, Task 2
+
+-- Create client_type data type
+DROP TYPE IF EXISTS public.account_type;
 CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
@@ -60,3 +65,29 @@ ORDER BY classification_id ASC
 
 SELECT * FROM public.inventory
 ORDER BY inv_id ASC
+
+-- INSERT A NEW RECORD
+INSERT INTO public.account (
+	account_firstname,
+	account_lastname,
+	account_email,
+	account_password
+)
+VALUES (
+	'Tony',
+	'Stark',
+	'tony@starkent.com',
+	'Iam1ronM@n'
+)
+
+-- Query 4th
+UPDATE public.inventory
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
+WHERE inv_make = 'GM' AND inv_model = 'Hummer';
+
+
+-- Query 6th
+UPDATE public.inventory
+SET
+	inv_image = REPLACE(inv_image, '/image/', '/images/vehicles/'),
+	inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles');
