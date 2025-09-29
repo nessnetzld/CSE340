@@ -68,12 +68,20 @@ app.use(async (err, req, res, next) => {
  * Local Server Information
  * Values from .env (environment) file
  *************************/
-const port = process.env.PORT;
-const host = process.env.HOST;
+const port = process.env.PORT || 4000;
+const host = process.env.HOST || "localhost";
+
+const isProduction = process.env.NODE_ENV === "production";
 
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-app.listen(port, () => {
-  console.log(`app listening on ${host}:${port}`);
-});
+if (isProduction) {
+  app.listen(port, () => {
+    console.log(`🚀 App running in production on port ${port}`);
+  });
+} else {
+  app.listen(port, host, () => {
+    console.log(`🛠️ App running locally at http://${host}:${port}`);
+  });
+}
