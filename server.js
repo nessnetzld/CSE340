@@ -5,9 +5,9 @@
 /* ***********************
  * Require Statements
  *********************** */
-const inventoryRoute = require("./routes/inventoryRoute");
-const baseController = require("./controllers/baseController");
 const utilities = require("./utilities/");
+const inventoryRoute = require("./routes/inventoryRoute"); ////
+const baseController = require("./controllers/baseController");
 const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config();
@@ -28,12 +28,10 @@ app.set("layout", "./layouts/layout"); // not at views root
 app.use(static);
 //app.use(require("./routes/static"));
 // Index route
-app.get("/", utilities.handleErrors(baseController.buildHome));
+app.get("/", baseController.buildHome);
 // app.get("/", function (req, res) {
 //   res.render("index", { title: "Home" });
 // });
-// Inventory routes
-//app.use("/inv", inventoryRoute);
 // Inventory routes
 app.use("/inv", inventoryRoute);
 
@@ -68,20 +66,12 @@ app.use(async (err, req, res, next) => {
  * Local Server Information
  * Values from .env (environment) file
  *************************/
-const port = process.env.PORT || 4000;
-const host = process.env.HOST || "localhost";
-
-const isProduction = process.env.NODE_ENV === "production";
+const port = process.env.PORT;
+const host = process.env.HOST;
 
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-if (isProduction) {
-  app.listen(port, () => {
-    console.log(`🚀 App running in production on port ${port}`);
-  });
-} else {
-  app.listen(port, host, () => {
-    console.log(`🛠️ App running locally at http://${host}:${port}`);
-  });
-}
+app.listen(port, () => {
+  console.log(`App running in on port ${host}:${port}`);
+});
