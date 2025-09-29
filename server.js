@@ -74,6 +74,6 @@ const host = process.env.HOST;
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`);
 });
