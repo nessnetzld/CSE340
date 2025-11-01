@@ -18,4 +18,5 @@ pnpm-lock.yaml
 # .DS_Store is only for Mac users
 **/.DS_Store
 
-README.md/
+# Ignore the file README.md
+README.md
